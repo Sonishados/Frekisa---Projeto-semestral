@@ -1,0 +1,257 @@
+﻿@model IEnumerable<Frekisa.Models.Clientes>
+
+@{
+    ViewBag.Title = "Planos";
+}
+<h1 class="text-left" style="margin-bottom: 50px"><b>Planos</b></h1>
+
+<h4> Nível de Plano: @ViewData["plano"]    |    Renda Mensal: @ViewData["renda"]</h4>
+<br />
+<form method="post">
+    <div class="col-md-2 col-md-offset-1 text-center" style="background-color:lightgray; padding: 0 20px 20px; border-radius: 15px">
+        <div style="background-color: #5D2E8C; border-radius: 10px">
+            <h3 style="color:white; padding: 5px 0 5px 0">Plano 1</h3>
+        </div>
+        <p>Detalhes:</p>
+        <p>48x R$ 210,00</p>
+        <p>Valor recebido: R$9.000,00</p>
+        @if (ViewData["plano"].ToString().Trim() == "0")
+        {
+            <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal1" type="button" style="margin-top: 20px" disabled>Selecionar</button>
+
+        }
+        else
+        {
+            <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal1" type="button" style="margin-top: 20px">Selecionar</button>
+
+        }
+    </div>
+    <div class="col-md-2 col-md-offset-1 text-center" style="background-color:lightgray; padding: 0 20px 20px; border-radius: 15px">
+        <div style="background-color: #5D2E8C; border-radius: 10px">
+            <h3 style="color:white; padding: 5px 0 5px 0">Plano 2</h3>
+        </div>
+        <p>Detalhes:</p>
+        <p>60x R$ 390,00</p>
+        <p>Valor recebido: R$20.000,00</p>
+        @if (ViewData["plano"].ToString().Trim() == "2" || ViewData["plano"].ToString().Trim() == "3")
+        {
+            <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal2" type="button" style="margin-top: 20px">Selecionar</button>
+
+        }
+        else
+        {
+            <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal2" type="button" style="margin-top: 20px" disabled>Selecionar</button>
+
+        }
+    </div>
+    <div class="col-md-2 col-md-offset-1 text-center" style="background-color:lightgray; padding: 0 20px 20px; border-radius: 15px">
+        <div style="background-color: #5D2E8C; border-radius: 10px">
+            <h3 style="color:white; padding: 5px 0 5px 0">Plano 3</h3>
+        </div>
+        <p>Detalhes:</p>
+        <p>72x R$ 480,00</p>
+        <p>Valor recebido: R$31.000,00</p>
+        @if (ViewData["plano"].ToString().Trim() != "3")
+        {
+            <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal3" type="button" style="margin-top: 20px" disabled>Selecionar</button>
+
+        }
+        else
+        {
+            <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal3" type="button" style="margin-top: 20px">Selecionar</button>
+
+        }
+
+    </div>
+    <!--Modal1-->
+
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float:left;"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        @if (Session["Perfil"].ToString().ToUpper().Trim() == "TRUE")
+                        {
+                            <input id="plano" name="plano" value="Plano 1" maxlength="20" />
+
+                        }
+                        else
+                        {
+                            <input id="plano" name="plano" value="Plano 1" readonly />
+
+                        }
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    @if (Session["Perfil"].ToString().ToUpper().Trim() == "TRUE")
+                    {
+
+                        <div class="form-group form-inline">
+                            @Html.Label("Parcelas", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="parcelas" name="parcelas" value="48x" style="width:30%;" maxlength="10"/>
+                        </div>
+                        <div class="form-group form-inline">
+                            @Html.Label("Valor da Parcela", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="valorParcela" name="valorParcela" value="210" style="width:30%;" maxlength="10" />
+                        </div>
+                        <div>
+                            @Html.Label("Valor", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="valor" name="valor" value="9000" style="width:30%;" maxlength="10"/>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group form-inline">
+                            @Html.Label("Parcelas", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="parcelas" name="parcelas" value="48x" style="width:30%;" readonly />
+                        </div>
+                        <div class="form-group form-inline">
+                            @Html.Label("Valor da Parcela", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="valorParcela" name="valorParcela" value="210" style="width:30%;" readonly />
+                        </div>
+                        <div>
+                            @Html.Label("Valor", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="valor" name="valor" value="9000" style="width:30%;" readonly />
+                        </div>
+                    }
+                    <br>
+                    <p>Ao contiunuar o contrato do cliente será criado, deseja continuar ?</p>
+                </div>
+                <div class="modal-footer lado-a-lado">
+                    <button id="botaoPlano" name="botaoPlano" value="1" type="submit" class="btn btn-success">Continuar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Modal2-->
+
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float:left;"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        @if (Session["Perfil"].ToString().ToUpper().Trim() == "TRUE")
+                        {
+                            <input id="plano2" name="plano2" value="Plano 2" maxlength="20"/>
+
+                        }
+                        else
+                        {
+                            <input id="plano2" name="plano2" value="Plano 2" readonly />
+
+                        }
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    @if (Session["Perfil"].ToString().ToUpper().Trim() == "TRUE")
+                    {
+
+                        <div class="form-group form-inline">
+                            @Html.Label("Parcelas", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="parcelas2" name="parcelas2" value="60x" style="width:30%;" maxlength="10"/>
+                        </div>
+                        <div class="form-group form-inline">
+                            @Html.Label("Valor da Parcela", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="valorParcela2" name="valorParcela2" value="390" style="width:30%;" maxlength="10"/>
+                        </div>
+                        <div>
+                            @Html.Label("Valor", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="valor2" name="valor2" value="20000" style="width:30%;" maxlength="10" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group form-inline">
+                            @Html.Label("Parcelas", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="parcelas2" name="parcelas2" value="60x" style="width:30%;" readonly />
+                        </div>
+                        <div class="form-group form-inline">
+                            @Html.Label("Valor da Parcela", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="valorParcela2" name="valorParcela2" value="390" style="width:30%;" readonly />
+                        </div>
+                        <div>
+                            @Html.Label("Valor", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="valor2" name="valor2" value="20000" style="width:30%;" readonly />
+                        </div>
+                    }
+                    <br>
+                    <p>Ao contiunuar o contrato do cliente será criado, deseja continuar ?</p>
+                </div>
+                <div class="modal-footer lado-a-lado">
+                    <button id="botaoPlano" name="botaoPlano" value="2" type="submit" class="btn btn-success">Continuar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Modal 3-->
+
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float:left;"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        @if (Session["Perfil"].ToString().ToUpper().Trim() == "TRUE")
+                        {
+                            <input id="plano3" name="plano3" value="Plano 3" maxlength="20"/>
+
+                        }
+                        else
+                        {
+                            <input id="plano3" name="plano3" value="Plano 3" readonly/>
+
+                        }
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    @if (Session["Perfil"].ToString().ToUpper().Trim() == "TRUE")
+                    {
+
+                        <div class="form-group form-inline">
+                            @Html.Label("Parcelas", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="parcelas3" name="parcelas3" value="72x" style="width:30%;" maxlength="10" />
+                        </div>
+                        <div class="form-group form-inline">
+                            @Html.Label("Valor da Parcela", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="valorParcela3" name="valorParcela3" value="480" style="width:30%;" maxlength="10"/>
+                        </div>
+                        <div>
+                            @Html.Label("Valor", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="valor3" name="valor3" value="31000" style="width:30%;" maxlength="10"/>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group form-inline">
+                            @Html.Label("Parcelas", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="parcelas3" name="parcelas3" value="72x" style="width:30%;" readonly />
+                        </div>
+                        <div class="form-group form-inline">
+                            @Html.Label("Valor da Parcela", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="valorParcela3" name="valorParcela3" value="480" style="width:30%;" readonly />
+                        </div>
+                        <div>
+                            @Html.Label("Valor", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <input id="valor3" name="valor3" value="31000" style="width:30%;" readonly />
+                        </div>
+                    }
+                    <br>
+                    <p>Ao contiunuar o contrato do cliente será criado, deseja continuar ?</p>
+                </div>
+                <div class="modal-footer lado-a-lado">
+                    <button id="botaoPlano" name="botaoPlano" value="3" type="submit" class="btn btn-success">Continuar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</form>
+

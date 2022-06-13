@@ -1,0 +1,66 @@
+﻿@model Frekisa.Models.Funcionarios
+
+@{
+    ViewBag.Title = "Editar";
+    Layout = "~/Views/Shared/LayoutModal.cshtml";
+}
+
+<h2 class="text-center"><b>Editar Funcionário</b></h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 class="text-center">Funcionário</h4>
+        <div class="modal-body" style="display:flex; justify-content:center">
+            <div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.id_funcionario)
+
+                <div>
+                    <label>Nome:</label>
+                    <div>
+                        @Html.EditorFor(model => model.nome_funcionario, new { htmlAttributes = new { @class = "form-control", maxlength = "50", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.nome_funcionario, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div>
+                    <label>CPF:</label>
+                    <div>
+                        @Html.EditorFor(model => model.cpf_funcionario, new { htmlAttributes = new { @class = "form-control", @id = "cpf_funcionario", placeholder = "___.___.___-__", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.cpf_funcionario, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div>
+                    <label>Login:</label>
+                    <div>
+                        @Html.EditorFor(model => model.login, new { htmlAttributes = new { @class = "form-control", maxlength = "50", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.login, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div>
+                    <label>Senha:</label>
+                    <div>
+                        @Html.EditorFor(model => model.senha, new { htmlAttributes = new { @class = "form-control", maxlength = "20", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.senha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal-footer lado-a-lado">
+            <button type="submit" value="Save" class="btn btn-success">Salvar</button>
+            <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Index")'">Cancelar</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#cpf_funcionario").inputmask("mask", { "mask": "999.999.999-99" }, { reverse: true });
+        });
+    </script>
+}

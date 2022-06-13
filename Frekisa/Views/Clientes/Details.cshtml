@@ -1,0 +1,68 @@
+﻿@model Frekisa.Models.Clientes
+
+@{
+    ViewBag.Title = "Detalhes";
+    Layout = "~/Views/Shared/LayoutModal.cshtml";
+}
+
+<h2 class="text-center">Detalhes Cientes</h2>
+
+<div>
+    <h4 class="text-center">Cliente</h4>
+    <hr />
+    <div class="modal-body" style="display:flex; justify-content:center">
+        <dl class="dl-horizontal">
+            <dt>
+                Nome do Cliente:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nome_cliente)
+            </dd>
+
+            <dt>
+                CPF:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.cpf_cliente)
+            </dd>
+
+            <dt>
+                Telefone:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.telefone_cliente)
+            </dd>
+
+            <dt>
+                Email:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.email_cliente)
+            </dd>
+
+            <dt>
+                Renda Mensal:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.renda_mensal)
+            </dd>
+
+            <dt>
+                Endereço:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.endereco)
+            </dd>
+
+        </dl>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Index")'" style="width:30%">Voltar</button>
+</div>

@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Frekisa.Models.Contrato>
+
+@{
+    ViewBag.Title = "Lista de Contratos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2><b>Contratos</b></h2>
+<hr />
+
+@if (TempData["confirm"] != null)
+{
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <strong>@TempData["confirm"]</strong>
+    </div>
+}
+
+<table class="table table-striped table-hover" id="tabelaContrato">
+    <thead>
+        <tr>
+            <th>
+                ID do Contrato
+            </th>
+            <th>
+                ID do Cliente
+            </th>
+            <th>
+                Nome do Cliente
+            </th>
+            <th>
+                ID do Funcionario
+            </th>
+            <th>
+                Nome do Funcionario
+            </th>
+            <th>
+                Plano
+            </th>
+            <th>
+                Valor Pago
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_contrato)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clientes.id_cliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clientes.nome_cliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Funcionarios.id_funcionario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Funcionarios.nome_funcionario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Plano)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valor_recebido)
+                </td>
+                <td>
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.id_contrato }, new { @data_toggle = "modal", data_target = "#detalhes" }) |
+                    @if (Session["Perfil"].ToString().ToUpper().Trim() == "TRUE")
+                    {
+                        @Html.ActionLink("Excluir", "Delete", new { id = item.id_contrato }, new { @data_toggle = "modal", data_target = "#detalhes" })
+                    }
+                </td>
+
+                <!--Modal para Detalhes e Deletar-->
+                <div class="modal fade" id="detalhes" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                        </div>
+                    </div>
+                </div>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#tabelaContrato").DataTable({
+            "language": {
+                "lengthMenu": "Exibe _MENU_ Registros por Pagina",
+                "search": "Procurar",
+                "paginate": { "previous": "Retornar", "next": "Avançar" },
+                "zeroRecords": "Nada foi encontrado.",
+                "info": "Exibindo página _PAGE_ de _PAGE_",
+                "infoEmpty": "Sem Registro",
+                "infoFiltered": "(filtro de _MAX_ registros totais)"
+            }
+        });
+    });
+</script>

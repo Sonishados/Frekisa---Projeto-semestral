@@ -1,0 +1,80 @@
+﻿@model Frekisa.Models.Clientes
+
+@{
+    ViewBag.Title = "Excluir";
+    Layout = "~/Views/Shared/LayoutModal.cshtml";
+
+}
+
+<h2 class="text-center"><b>Deletar</b></h2>
+
+<h3 class="text-center">Tem certeza que deseja excluir o Cliente ?</h3>
+
+
+<div>
+    <h4 class="text-center">Clientes</h4>
+    <hr />
+    <div class="modal-body lado-a-lado" style="display:flex; justify-content:center">
+        <dl class="dl-horizontal">
+            <dt>
+                Nome do Cliente:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nome_cliente)
+            </dd>
+
+            <dt>
+                CPF:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.cpf_cliente)
+            </dd>
+
+            <dt>
+                Telefone:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.telefone_cliente)
+            </dd>
+
+            <dt>
+                Email:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.email_cliente)
+            </dd>
+
+            <dt>
+                Renda Mensal:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.renda_mensal)
+            </dd>
+
+            <dt>
+                Endereço:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.endereco)
+            </dd>
+
+        </dl>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="modal-footer lado-a-lado">
+    <button class="btn btn-danger" value="Delete" type="submit">Deletar</button>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Index")'">Voltar</button>
+</div>
+
+    }
+</div>
+

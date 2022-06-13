@@ -1,0 +1,70 @@
+﻿@model Frekisa.Models.Funcionarios
+
+@{
+    ViewBag.Title = "Excluir";
+    Layout = "~/Views/Shared/LayoutModal.cshtml";
+}
+
+<h2 class="text-center"><b>Excluir</b></h2>
+
+<h3 class="text-center">Tem certeza que deseja excluir esse funcionario?</h3>
+
+
+<div>
+    <h4 class="text-center">Funcionarios</h4>
+    <hr />
+    <div class="modal-body lado-a-lado">
+        <dl class="dl-horizontal">
+            <dt>
+                Nome:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nome_funcionario)
+            </dd>
+
+            <dt>
+                CPF:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.cpf_funcionario)
+            </dd>
+
+            <dt>
+                Login:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.login)
+            </dd>
+
+            <dt>
+                Senha:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.senha)
+            </dd>
+
+            <dt>
+                Gerente ?:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.is_gerente)
+            </dd>
+
+        </dl>
+    </div>
+    @using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+
+<div class="modal-footer lado-a-lado">
+    <button type="submit" value="Delete" class="btn btn-danger">Deletar</button>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Index")'">Voltar</button>
+</div>
+    }
+</div>
+
